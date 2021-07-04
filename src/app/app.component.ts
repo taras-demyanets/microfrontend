@@ -37,6 +37,9 @@ export class AppComponent implements OnInit {
 
         this.router = new MetaRouter(config);
         this.router.outletStateChanged = (state: OutletState) => this.logState(state);
+        this.router.registerRouteChangeCallbackAsync(async (metaroute: string) => {
+            return Promise.resolve(false);
+        });
     }
 
     ngOnInit(): void {
@@ -59,6 +62,6 @@ export class AppComponent implements OnInit {
     }
 
     logState(state: OutletState): void {
-        console.log(`Active roite in '${state.outlet}' is '${state.activeRoute.url}'`);
+        console.log(`Active route in '${state.outlet}' is '${state.activeRoute.url}'`);
     }
 }
